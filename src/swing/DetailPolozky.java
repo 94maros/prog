@@ -37,26 +37,51 @@ public class DetailPolozky extends JDialog {
             JPanel meno = new JPanel();
                 meno.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec1.add(meno);
+                JLabel popisMeno = new JLabel("Meno:");
+                meno.add(popisMeno);
+                JTextField zadajMeno = new JTextField(20);
+                meno.add(zadajMeno);
 
             JPanel priezvisko = new JPanel();
                 priezvisko.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec1.add(priezvisko);
+                JLabel popisPriezvisko = new JLabel("Priezvisko:");
+                priezvisko.add(popisPriezvisko);
+                JTextField zadajPriezvisko = new JTextField(20);
+                priezvisko.add(zadajPriezvisko);
 
             JPanel adresa = new JPanel();
                 adresa.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec1.add(adresa);
+                JLabel popisUlica = new JLabel("Ulica:");
+                adresa.add(popisUlica);
+                JTextField zadajUlicu = new JTextField(20);
+                adresa.add(zadajUlicu);
 
             JPanel mesto = new JPanel();
                 mesto.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec2.add(mesto);
+                JLabel popisMesto = new JLabel("Mesto:");
+                mesto.add(popisMesto);
+                JTextField zadajMesto = new JTextField(10);
+                mesto.add(zadajMesto);
 
             JPanel stat = new JPanel();
                 stat.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec2.add(stat);
+                JLabel popisStat = new JLabel("Stat:");
+                stat.add(popisStat);
+                JComboBox zadajStat = new JComboBox(new String[] {"Slovensko", "Česko", "Maďarsko", "Poľsko", "Rakúsko"});
+                stat.add(zadajStat);
 
             JPanel telC = new JPanel();
                 telC.setLayout(new FlowLayout(FlowLayout.RIGHT));
                 stlpec2.add(telC);
+                JLabel popisCislo = new JLabel("Telefónne č.:");
+                telC.add(popisCislo);
+                JTextField zadajCislo = new JTextField(10);
+                telC.add(zadajCislo);
+
 
 
     }
