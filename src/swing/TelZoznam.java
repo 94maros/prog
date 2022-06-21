@@ -35,21 +35,21 @@ public class TelZoznam extends JFrame {
         tlacidla.setLayout(new FlowLayout());
         okno.add(tlacidla, BorderLayout.PAGE_END);
 
-        JButton pridat = new JButton("Pridaj");
+        JButton pridat = new JButton("Pridaj!");
         pridat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Polozka polozka = new Polozka();
             }
         });
-        JButton upravit = new JButton("Zmen");
+        JButton upravit = new JButton("Zmen!");
         pridat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Polozka polozka = new Polozka();
             }
         });
-        JButton odstranit = new JButton("Vymaz");
+        JButton odstranit = new JButton("Vymaz!");
         pridat.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
