@@ -21,5 +21,16 @@ public class DetailPolozky extends JDialog {
         }
         Container okno = getContentPane();
         okno.setLayout(new BoxLayout(okno, BoxLayout.PAGE_AXIS));
+        JPanel udaje = new JPanel();
+            udaje.setLayout(new BoxLayout(udaje, BoxLayout.PAGE_AXIS));
+            okno.add(udaje);
+
+            JPanel stlpec1 = new JPanel();
+            stlpec1.setLayout(new BoxLayout(stlpec1, BoxLayout.PAGE_AXIS));
+            udaje.add(stlpec1);
+
+            JPanel stlpec2 = new JPanel();
+            stlpec2.setLayout(new BoxLayout(stlpec2, BoxLayout.PAGE_AXIS));
+            udaje.add(stlpec2);
     }
 }
