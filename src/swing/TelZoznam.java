@@ -11,7 +11,7 @@ public class TelZoznam extends JFrame {
         Container okno = getContentPane();
         okno.setLayout(new BorderLayout());
         //hladanie
-        {//zoznam - vyhladavanie
+        {//zoznam - vytvorenie panela v okne
         JPanel list = new JPanel();
         list.setLayout(new FlowLayout());
         okno.add(list, BorderLayout.PAGE_START);
@@ -27,6 +27,9 @@ public class TelZoznam extends JFrame {
         JScrollPane posuvnik = new JScrollPane(zoznam);
         okno.add(posuvnik, BorderLayout.CENTER);
 
+        JPanel tlacidla = new JPanel();
+        tlacidla.setLayout(new FlowLayout());
+        okno.add(tlacidla, BorderLayout.PAGE_END);
         pack();
     }
 }
