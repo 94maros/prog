@@ -40,24 +40,32 @@ public class TelZoznam extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Polozka polozka = new Polozka();
-            }
-        });
-        JButton upravit = new JButton("Zmen!");
-        pridat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Polozka polozka = new Polozka();
-            }
-        });
-        JButton odstranit = new JButton("Vymaz!");
-        pridat.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Polozka polozka = new Polozka();
+                DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.PRIDAT, polozka);
+                det.setVisible(true);
             }
         });
         tlacidla.add(pridat);
+        JButton upravit = new JButton("Zmen!");
+        upravit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Polozka polozka = new Polozka();
+                DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.UPRAVIT, polozka);
+                det.setVisible(true);
+            }
+        });
         tlacidla.add(upravit);
+        JButton odstranit = new JButton("Vymaz!");
+        odstranit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Polozka polozka = new Polozka();
+                DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.ODSTRANIT, polozka);
+                det.setVisible(true);
+            }
+        });
+
+
         tlacidla.add(odstranit);
 
 
