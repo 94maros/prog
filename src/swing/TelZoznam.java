@@ -1,7 +1,11 @@
 package swing;
 
+import model.Polozka;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TelZoznam extends JFrame {
     public TelZoznam(){
@@ -30,6 +34,33 @@ public class TelZoznam extends JFrame {
         JPanel tlacidla = new JPanel();
         tlacidla.setLayout(new FlowLayout());
         okno.add(tlacidla, BorderLayout.PAGE_END);
-        pack();
+
+        JButton pridat = new JButton("Pridaj");
+        pridat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Polozka polozka = new Polozka();
+            }
+        });
+        JButton upravit = new JButton("Zmen");
+        pridat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Polozka polozka = new Polozka();
+            }
+        });
+        JButton odstranit = new JButton("Vymaz");
+        pridat.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Polozka polozka = new Polozka();
+            }
+        });
+        tlacidla.add(pridat);
+        tlacidla.add(upravit);
+        tlacidla.add(odstranit);
+
+
+                pack();
     }
 }
