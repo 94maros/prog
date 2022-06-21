@@ -4,6 +4,8 @@ import model.Polozka;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.concurrent.Flow;
 
 public class DetailPolozky extends JDialog {
@@ -81,6 +83,34 @@ public class DetailPolozky extends JDialog {
                 telC.add(popisCislo);
                 JTextField zadajCislo = new JTextField(10);
                 telC.add(zadajCislo);
+
+
+            JPanel tlacidla = new JPanel();
+            tlacidla.setLayout(new FlowLayout());
+            okno.add(tlacidla);
+            if(moznosti==Moznosti.PRIDAT) {
+                JButton vytvor = new JButton("Vytvor!");
+                tlacidla.add(vytvor);
+            }
+            if(moznosti==Moznosti.UPRAVIT) {
+                JButton uprav = new JButton("Zmen!");
+                tlacidla.add(uprav);
+            }
+            if(moznosti==Moznosti.ODSTRANIT) {
+                JButton zmaz = new JButton("Vymaz");
+                tlacidla.add(zmaz);
+            }
+
+            JButton zrus = new JButton("Zrušiť!");
+            zrus.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    DetailPolozky.this.setVisible(false);
+                }
+            });
+            tlacidla.add(zrus);
+
+            pack();
 
 
 
