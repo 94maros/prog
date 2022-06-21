@@ -4,6 +4,7 @@ import model.Polozka;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.concurrent.Flow;
 
 public class DetailPolozky extends JDialog {
     public DetailPolozky(TelZoznam zoznam, Moznosti moznosti, Polozka polozka){
@@ -32,5 +33,32 @@ public class DetailPolozky extends JDialog {
             JPanel stlpec2 = new JPanel();
             stlpec2.setLayout(new BoxLayout(stlpec2, BoxLayout.PAGE_AXIS));
             udaje.add(stlpec2);
+
+            JPanel meno = new JPanel();
+                meno.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec1.add(meno);
+
+            JPanel priezvisko = new JPanel();
+                priezvisko.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec1.add(priezvisko);
+
+            JPanel adresa = new JPanel();
+                adresa.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec1.add(adresa);
+
+            JPanel mesto = new JPanel();
+                mesto.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec2.add(mesto);
+
+            JPanel stat = new JPanel();
+                stat.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec2.add(stat);
+
+            JPanel telC = new JPanel();
+                telC.setLayout(new FlowLayout(FlowLayout.RIGHT));
+                stlpec2.add(telC);
+
+
     }
+
 }
