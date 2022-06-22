@@ -6,8 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.LinkedList;
+import java.util.List;
 
 public class TelZoznam extends JFrame {
+
+    private List<Polozka> polozky = new LinkedList<Polozka>();
+    private DefaultListModel zoznamModel;
     public TelZoznam(){
         //nazov okna aplikacie
         setTitle("Telefónny zoznam");
@@ -27,7 +32,8 @@ public class TelZoznam extends JFrame {
         list.add(hladane);}
 
         //zoznam
-        JList zoznam = new JList();
+        zoznamModel = new DefaultListModel();
+        JList zoznam = new JList(zoznamModel);
         JScrollPane posuvnik = new JScrollPane(zoznam);
         okno.add(posuvnik, BorderLayout.CENTER);
 
@@ -42,6 +48,10 @@ public class TelZoznam extends JFrame {
                 Polozka polozka = new Polozka();
                 DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.PRIDAT, polozka);
                 det.setVisible(true);
+                if (!det.Zrusit()){
+                    polozky.add(polozka);
+                    zoznamModel.addElement(polozka.getMeno()+" "+polozka.getPriezvisko());
+                }
             }
         });
         tlacidla.add(pridat);
@@ -64,9 +74,8 @@ public class TelZoznam extends JFrame {
                 det.setVisible(true);
             }
         });
-
-
         tlacidla.add(odstranit);
+
 
         JButton ukoncit = new JButton("Koniec!");
         ukoncit.addActionListener(new ActionListener() {
@@ -77,7 +86,6 @@ public class TelZoznam extends JFrame {
         });
 
         tlacidla.add(ukoncit);
-
 
                 pack();
     }

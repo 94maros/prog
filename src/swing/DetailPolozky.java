@@ -1,15 +1,24 @@
 package swing;
 
 import model.Polozka;
-
+import swing.TelZoznam;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.concurrent.Flow;
 
 public class DetailPolozky extends JDialog {
+
+    private JTextField zadajMeno;
+    private JTextField zadajPriezvisko;
+    private JTextField zadajUlicu;
+    private JTextField zadajMesto;
+    private JComboBox zadajStat;
+    private JTextField zadajCislo;
+
     String predv;
-    public DetailPolozky(TelZoznam zoznam, Moznosti moznosti, Polozka polozka){
+    private boolean zrusenie;
+    public DetailPolozky(TelZoznam zoznam, Moznosti moznosti,  Polozka polozka){
         super(zoznam, true);
         switch(moznosti) {
             case PRIDAT:
@@ -147,6 +156,7 @@ public class DetailPolozky extends JDialog {
         zrus.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                    zrusenie =true;
                     DetailPolozky.this.setVisible(false);
                 }
         });
@@ -156,5 +166,42 @@ public class DetailPolozky extends JDialog {
 
 
     }
+    public boolean Zrusit() {
+        return zrusenie;
+    }
+    private boolean pridajPolozku(Polozka pol){
+        if(zadajMeno.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nezadal si meno!");
+            zadajMeno.requestFocus();
+            return false;
+        }
+        if(zadajPriezvisko.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nezadal si priezvisko!");
+            zadajPriezvisko.requestFocus();
+            return false;
+        }
+        if(zadajUlicu.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nezadal si adresu!");
+            zadajUlicu.requestFocus();
+            return false;
+        }
+        if(zadajMesto.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nezadal si mesto!");
+            zadajMesto.requestFocus();
+            return false;
+        }
+        if(zadajCislo.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nezadal si cislo!");
+            zadajCislo.requestFocus();
+            return false;
+        }
+        pol.setMeno(zadajMeno.getText());
+        pol.setPriezvisko(zadajPriezvisko.getText());
+        pol.setAdresa(zadajUlicu.getText());
+        pol.setMesto(zadajMesto.getText());
+        pol.setStat(zadajStat.getSelectedItem());
+        pol.setTelC(zadajCislo.getText());
+        return true;
 
+    }
 }
