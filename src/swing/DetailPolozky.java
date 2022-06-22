@@ -50,7 +50,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(meno);
         JLabel popisMeno = new JLabel("Meno:");
         meno.add(popisMeno);
-        JTextField zadajMeno = new JTextField(20);
+        zadajMeno = new JTextField(20);
         meno.add(zadajMeno);
 
         JPanel priezvisko = new JPanel();
@@ -58,7 +58,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(priezvisko);
         JLabel popisPriezvisko = new JLabel("Priezvisko:");
         priezvisko.add(popisPriezvisko);
-        JTextField zadajPriezvisko = new JTextField(20);
+        zadajPriezvisko = new JTextField(20);
         priezvisko.add(zadajPriezvisko);
 
         JPanel adresa = new JPanel();
@@ -66,7 +66,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(adresa);
         JLabel popisUlica = new JLabel("Ulica:");
         adresa.add(popisUlica);
-        JTextField zadajUlicu = new JTextField(20);
+        zadajUlicu = new JTextField(20);
         adresa.add(zadajUlicu);
 
         JPanel mesto = new JPanel();
@@ -74,7 +74,7 @@ public class DetailPolozky extends JDialog {
         stlpec2.add(mesto);
         JLabel popisMesto = new JLabel("Mesto:");
         mesto.add(popisMesto);
-        JTextField zadajMesto = new JTextField(10);
+        zadajMesto = new JTextField(10);
         mesto.add(zadajMesto);
 
         JPanel stat = new JPanel();
@@ -82,7 +82,7 @@ public class DetailPolozky extends JDialog {
         stlpec2.add(stat);
         JLabel popisStat = new JLabel("Stat:");
         stat.add(popisStat);
-        JComboBox zadajStat = new JComboBox(new String[] {"Slovensko", "Česko", "Maďarsko", "Poľsko", "Rakúsko"});
+        zadajStat = new JComboBox(new String[] {"Slovensko", "Česko", "Maďarsko", "Poľsko", "Rakúsko"});
         stat.add(zadajStat);
 
 
@@ -121,7 +121,7 @@ public class DetailPolozky extends JDialog {
         JLabel predvolba  =new JLabel(String.valueOf(predv));
 
         telC.add(popisCislo);telC.add(predvolba);
-        JTextField zadajCislo = new JTextField(10);
+        zadajCislo = new JTextField(10);
         zadajCislo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -141,6 +141,15 @@ public class DetailPolozky extends JDialog {
         okno.add(tlacidla);
         if(moznosti==Moznosti.PRIDAT) {
             JButton vytvor = new JButton("Vytvor!");
+            vytvor.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (pridajPolozku(polozka)){
+                        zrusenie = false;
+                        DetailPolozky.this.setVisible(false);
+                    }
+                }
+            });
             tlacidla.add(vytvor);
         }
         if(moznosti==Moznosti.UPRAVIT) {
@@ -175,7 +184,7 @@ public class DetailPolozky extends JDialog {
             zadajMeno.requestFocus();
             return false;
         }
-        if(zadajPriezvisko.getText().length()==0) {
+        if(zadajPriezvisko.getText().trim().length()==0) {
             JOptionPane.showMessageDialog(this, "Nezadal si priezvisko!");
             zadajPriezvisko.requestFocus();
             return false;
@@ -199,7 +208,7 @@ public class DetailPolozky extends JDialog {
         pol.setPriezvisko(zadajPriezvisko.getText());
         pol.setAdresa(zadajUlicu.getText());
         pol.setMesto(zadajMesto.getText());
-        pol.setStat(zadajStat.getSelectedItem());
+        //pol.setStat(zadajStat.getSelectedItem());
         pol.setTelC(zadajCislo.getText());
         return true;
 
