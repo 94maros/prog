@@ -1,6 +1,7 @@
 package swing;
 
 import model.Polozka;
+import swing.Podrobnosti;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,8 +75,6 @@ public class TelZoznam extends JFrame {
         tlacidla.add(upravit);
 
 
-
-
         JButton odstranit = new JButton("Vymaz!");
         odstranit.addActionListener(new ActionListener() {
             @Override
@@ -87,6 +86,21 @@ public class TelZoznam extends JFrame {
         });
         tlacidla.add(odstranit);
 
+
+        JButton detail = new JButton("Podrobnosti");
+        detail.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int pol = zoznam.getSelectedIndex();
+                Polozka polozka = polozky.get(pol);
+                Podrobnosti det = new Podrobnosti(TelZoznam.this, Moznosti.DETAIL, polozka);
+                det.setVisible(true);
+                if (!det.Zrusit()){
+                    //zoznamModel.addElement(polozka.getMeno()+" "+polozka.getPriezvisko());
+                }
+            }
+        });
+        tlacidla.add(detail);
 
         JButton ukoncit = new JButton("Koniec!");
         ukoncit.addActionListener(new ActionListener() {

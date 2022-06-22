@@ -6,20 +6,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class DetailPolozky extends JDialog {
+public class Podrobnosti extends JDialog {
 
-    private JTextField zadajMeno;
-    private JTextField zadajPriezvisko;
-    private JTextField zadajUlicu;
-    private JTextField zadajMesto;
+    private JLabel zadajMeno;
+    private JLabel zadajPriezvisko;
+    private JLabel zadajUlicu;
+    private JLabel zadajMesto;
     private JComboBox zadajStat;
-    private JTextField zadajCislo;
-
-    String predv;
+    private JLabel zadajCislo;
+    private JLabel predv;
+    //String predv;
     private boolean zrusenie;
-    public DetailPolozky(TelZoznam zoznam, Moznosti moznosti,  Polozka polozka){
+    public Podrobnosti(TelZoznam zoznam, Moznosti moznosti, Polozka polozka) {
         super(zoznam, true);
-        switch(moznosti) {
+        switch (moznosti) {
             case PRIDAT:
                 setTitle("Pridať položku");
                 break;
@@ -29,9 +29,11 @@ public class DetailPolozky extends JDialog {
             case ODSTRANIT:
                 setTitle("Odstrániť položku");
                 break;
-
-
+            /*case DETAIL:
+                setTitle("Podrobnosti o:" + zadajMeno);
+                break;*/
         }
+        setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
         Container okno = getContentPane();
         okno.setLayout(new BoxLayout(okno, BoxLayout.PAGE_AXIS));
         JPanel udaje = new JPanel();
@@ -51,7 +53,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(meno);
         JLabel popisMeno = new JLabel("Meno:");
         meno.add(popisMeno);
-        zadajMeno = new JTextField(20);
+        zadajMeno = new JLabel();
         meno.add(zadajMeno);
 
         JPanel priezvisko = new JPanel();
@@ -59,7 +61,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(priezvisko);
         JLabel popisPriezvisko = new JLabel("Priezvisko:");
         priezvisko.add(popisPriezvisko);
-        zadajPriezvisko = new JTextField(20);
+        zadajPriezvisko = new JLabel();
         priezvisko.add(zadajPriezvisko);
 
         JPanel adresa = new JPanel();
@@ -67,7 +69,7 @@ public class DetailPolozky extends JDialog {
         stlpec1.add(adresa);
         JLabel popisUlica = new JLabel("Ulica:");
         adresa.add(popisUlica);
-        zadajUlicu = new JTextField(20);
+        zadajUlicu = new JLabel();
         adresa.add(zadajUlicu);
 
         JPanel mesto = new JPanel();
@@ -75,7 +77,7 @@ public class DetailPolozky extends JDialog {
         stlpec2.add(mesto);
         JLabel popisMesto = new JLabel("Mesto:");
         mesto.add(popisMesto);
-        zadajMesto = new JTextField(10);
+        zadajMesto = new JLabel();
         mesto.add(zadajMesto);
 
         JPanel stat = new JPanel();
@@ -83,9 +85,10 @@ public class DetailPolozky extends JDialog {
         stlpec2.add(stat);
         JLabel popisStat = new JLabel("Stat:");
         stat.add(popisStat);
-        zadajStat = new JComboBox(new String[] {"Slovensko", "Česko", "Maďarsko", "Poľsko", "Rakúsko"});
+        zadajStat = new JComboBox(new String[]{"Slovensko", "Česko", "Maďarsko", "Poľsko", "Rakúsko"});
         stat.add(zadajStat);
 
+        //setTitle("podrobnosti o: ");
 
         //zamer - vybrat stat a zmeni sa predvolba automaticky
         zadajStat.addItemListener(new ItemListener() {
@@ -100,34 +103,35 @@ public class DetailPolozky extends JDialog {
         telC.setLayout(new FlowLayout(FlowLayout.RIGHT));
         stlpec2.add(telC);
         JLabel popisCislo = new JLabel("Telefónne č.:");
-            switch (zadajStat.getSelectedItem().toString()) {
-                //zadajStat.getSelectedItem()
-                case "Slovensko":
-                    predv = "+421";
-                    break;
-                case "Cesko":
-                    predv = "+420";
-                    break;
-                case "Madarsko":
-                    predv = "+36";
-                    break;
-                case "Rakusko":
-                    predv = "+43";
-                    break;
-                case "Polsko":
-                    predv = "+48";
-                    break;
+        /*switch (zadajStat.getSelectedItem().toString()) {
 
-        }
-        JLabel predvolba  =new JLabel(String.valueOf(predv));
+            case "Slovensko":
+                predv = "+421";
+                break;
+            case "Cesko":
+                predv = "+420";
+                break;
+            case "Madarsko":
+                predv = "+36";
+                break;
+            case "Rakusko":
+                predv = "+43";
+                break;
+            case "Polsko":
+                predv = "+48";
+                break;
 
-        telC.add(popisCislo);telC.add(predvolba);
-        zadajCislo = new JTextField(10);
+        }*/
+        JLabel predvolba = new JLabel(String.valueOf(predv));
+
+        telC.add(popisCislo);
+        telC.add(predvolba);
+        zadajCislo = new JLabel();
         zadajCislo.addKeyListener(new KeyAdapter() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char pismeno = e.getKeyChar();
-                if(Character.isDigit(pismeno)) {
+                if (Character.isDigit(pismeno)) {
                     return;
                 } else {
                     e.consume();
@@ -136,66 +140,33 @@ public class DetailPolozky extends JDialog {
         });
         telC.add(zadajCislo);
 
-
-        JPanel tlacidla = new JPanel();
-        tlacidla.setLayout(new FlowLayout());
-        okno.add(tlacidla);
-
-        if(moznosti==Moznosti.UPRAVIT) {
+        if(moznosti==Moznosti.DETAIL) {
             nacitajPolozku(polozka);
         }
-
-
-        if(moznosti==Moznosti.PRIDAT) {
-            JButton vytvor = new JButton("Vytvor!");
-            vytvor.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    if (pridajPolozku(polozka)){
-                        zrusenie = false;
-                        DetailPolozky.this.setVisible(false);
-                    }
-                }
-            });
-            tlacidla.add(vytvor);
-        }
-
-        if(moznosti==Moznosti.UPRAVIT) {
-            JButton uprav = new JButton("Zmen!");
-            uprav.addActionListener(new ActionListener() {
+        if(moznosti==Moznosti.DETAIL) {
+            JButton podr = new JButton("Zmen!");
+            podr.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if (pridajPolozku(polozka)) {
                         zrusenie = false;
-                        DetailPolozky.this.setVisible(false);
+                        Podrobnosti.this.setVisible(false);
                     }
                 }
             });
-            tlacidla.add(uprav);
-        }
-        if(moznosti==Moznosti.ODSTRANIT) {
-            JButton zmaz = new JButton("Vymaz");
-            tlacidla.add(zmaz);
+
+
+
+            pack();
         }
 
-        JButton zrus = new JButton("Zrušiť!");
-        zrus.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                    zrusenie =true;
-                    DetailPolozky.this.setVisible(false);
-                }
-        });
-        tlacidla.add(zrus);
 
-        pack();
 
 
     }
     public boolean Zrusit() {
         return zrusenie;
-    }
-    private boolean pridajPolozku(Polozka pol){
+    }private boolean pridajPolozku(Polozka pol){
         if(zadajMeno.getText().length()==0) {
             JOptionPane.showMessageDialog(this, "Nezadal si meno!");
             zadajMeno.requestFocus();
@@ -236,5 +207,25 @@ public class DetailPolozky extends JDialog {
         zadajMesto.setText(pol.getMesto());
         zadajStat.setSelectedItem(pol.getStat());
         zadajCislo.setText(pol.getTelC());
+        switch (zadajStat.getSelectedItem().toString()) {
+
+            case "Slovensko":
+                predv.setText("+421");
+                break;
+            case "Cesko":
+                predv.setText("+42");
+                break;
+            case "Madarsko":
+                predv.setText("+36");
+                break;
+            case "Rakusko":
+                predv.setText("+43");
+                break;
+            case "Polsko":
+                predv.setText("+448");
+                break;}
+
+        setTitle("podrobnosti o: " + pol.getMeno()
+                + " " + pol.getPriezvisko());
     }
 }
