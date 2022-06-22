@@ -55,16 +55,27 @@ public class TelZoznam extends JFrame {
             }
         });
         tlacidla.add(pridat);
+
+
         JButton upravit = new JButton("Zmen!");
         upravit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Polozka polozka = new Polozka();
+                int pol = zoznam.getSelectedIndex();
+                Polozka polozka = polozky.get(pol);
                 DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.UPRAVIT, polozka);
                 det.setVisible(true);
+
+                if(det.Zrusit()==false){
+                    zoznamModel.setElementAt(polozka.getMeno()+" "+polozka.getPriezvisko(), pol);
+                }
             }
         });
         tlacidla.add(upravit);
+
+
+
+
         JButton odstranit = new JButton("Vymaz!");
         odstranit.addActionListener(new ActionListener() {
             @Override

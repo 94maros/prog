@@ -1,11 +1,10 @@
 package swing;
 
 import model.Polozka;
-import swing.TelZoznam;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.concurrent.Flow;
 
 public class DetailPolozky extends JDialog {
 
@@ -139,6 +138,12 @@ public class DetailPolozky extends JDialog {
         JPanel tlacidla = new JPanel();
         tlacidla.setLayout(new FlowLayout());
         okno.add(tlacidla);
+
+        if(moznosti==Moznosti.UPRAVIT) {
+            nacitajPolozku(polozka);
+        }
+
+
         if(moznosti==Moznosti.PRIDAT) {
             JButton vytvor = new JButton("Vytvor!");
             vytvor.addActionListener(new ActionListener() {
@@ -152,8 +157,18 @@ public class DetailPolozky extends JDialog {
             });
             tlacidla.add(vytvor);
         }
+
         if(moznosti==Moznosti.UPRAVIT) {
             JButton uprav = new JButton("Zmen!");
+            uprav.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (pridajPolozku(polozka)) {
+                        zrusenie = false;
+                        DetailPolozky.this.setVisible(false);
+                    }
+                }
+            });
             tlacidla.add(uprav);
         }
         if(moznosti==Moznosti.ODSTRANIT) {
@@ -184,7 +199,7 @@ public class DetailPolozky extends JDialog {
             zadajMeno.requestFocus();
             return false;
         }
-        if(zadajPriezvisko.getText().trim().length()==0) {
+        if(zadajPriezvisko.getText().length()==0) {
             JOptionPane.showMessageDialog(this, "Nezadal si priezvisko!");
             zadajPriezvisko.requestFocus();
             return false;
@@ -211,6 +226,13 @@ public class DetailPolozky extends JDialog {
         //pol.setStat(zadajStat.getSelectedItem());
         pol.setTelC(zadajCislo.getText());
         return true;
-
+    }
+    private void nacitajPolozku(Polozka pol){
+        zadajMeno.setText(pol.getMeno());
+        zadajPriezvisko.setText(pol.getPriezvisko());
+        zadajUlicu.setText(pol.getAdresa());
+        zadajMesto.setText(pol.getMesto());
+        //zadajStat.setSelectedItem(pol.getStat());
+        zadajCislo.setText(pol.getTelC());
     }
 }

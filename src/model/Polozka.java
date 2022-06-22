@@ -29,7 +29,7 @@ public class Polozka {
         this.adresa = adresa;
     }
 
-    public String getMesto(String text) {
+    public String getMesto() {
         return mesto;
     }
     public void setMesto(String mesto) {
