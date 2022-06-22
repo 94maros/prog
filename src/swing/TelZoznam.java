@@ -68,6 +68,16 @@ public class TelZoznam extends JFrame {
 
         tlacidla.add(odstranit);
 
+        JButton ukoncit = new JButton("Koniec!");
+        ukoncit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        tlacidla.add(ukoncit);
+
 
                 pack();
     }
