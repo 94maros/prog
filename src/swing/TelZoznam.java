@@ -79,11 +79,18 @@ public class TelZoznam extends JFrame {
         odstranit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Polozka polozka = new Polozka();
+                int pol = zoznam.getSelectedIndex();
+                Polozka polozka = polozky.get(pol);
                 DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.ODSTRANIT, polozka);
-                det.setVisible(true);
+                //det.setVisible(true);
+
+                if(det.Zrusit()==false){
+                    zoznamModel.removeElementAt(pol);
+                    pack();
+                }
             }
         });
+
         tlacidla.add(odstranit);
 
 

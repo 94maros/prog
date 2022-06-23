@@ -174,7 +174,16 @@ public class DetailPolozky extends JDialog {
             tlacidla.add(uprav);
         }
         if(moznosti==Moznosti.ODSTRANIT) {
-            JButton zmaz = new JButton("Vymaz");
+            JButton zmaz = new JButton("Vymaz!");
+            zmaz.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if (pridajPolozku(polozka)) {
+                        zrusenie = false;
+                        DetailPolozky.this.setVisible(false);
+                    }
+                }
+            });
             tlacidla.add(zmaz);
         }
 
