@@ -62,6 +62,7 @@ public class TelZoznam extends JFrame {
         upravit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 int pol = zoznam.getSelectedIndex();
                 Polozka polozka = polozky.get(pol);
                 DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.UPRAVIT, polozka);
@@ -76,10 +77,22 @@ public class TelZoznam extends JFrame {
 
 
         JButton odstranit = new JButton("Vymaz!");
+        int pol = zoznam.getSelectedIndex();
+        //neviditelne pred oznacenim prvku
+        /*if(!zoznam.isSelectedIndex(pol)){
+            odstranit.setEnabled(false);
+            pack();
+        }*/
         odstranit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int pol = zoznam.getSelectedIndex();
+                //viditelne po oznaceni prvku
+                /*if(zoznam.isSelectedIndex(pol)){
+                    odstranit.setEnabled(true);
+                    pack();
+                }*/
+
                 Polozka polozka = polozky.get(pol);
                 DetailPolozky det = new DetailPolozky(TelZoznam.this, Moznosti.ODSTRANIT, polozka);
                 //det.setVisible(true);
