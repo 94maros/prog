@@ -14,8 +14,7 @@ public class Podrobnosti extends JDialog {
     private JLabel zadajMesto;
     private JComboBox zadajStat;
     private JLabel zadajCislo;
-    private JLabel predv;
-    //String predv;
+
     private boolean zrusenie;
     public Podrobnosti(TelZoznam zoznam, Moznosti moznosti, Polozka polozka) {
         super(zoznam, true);
@@ -29,9 +28,6 @@ public class Podrobnosti extends JDialog {
             case ODSTRANIT:
                 setTitle("Odstrániť položku");
                 break;
-            /*case DETAIL:
-                setTitle("Podrobnosti o:" + zadajMeno);
-                break;*/
         }
         setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
         Container okno = getContentPane();
@@ -122,10 +118,10 @@ public class Podrobnosti extends JDialog {
                 break;
 
         }*/
-        JLabel predvolba = new JLabel(String.valueOf(predv));
+        //JLabel predvolba = new JLabel(String.valueOf(predv));
 
         telC.add(popisCislo);
-        telC.add(predvolba);
+        //telC.add(predvolba);
         zadajCislo = new JLabel();
         zadajCislo.addKeyListener(new KeyAdapter() {
             @Override
@@ -207,24 +203,6 @@ public class Podrobnosti extends JDialog {
         zadajMesto.setText(pol.getMesto());
         zadajStat.setSelectedItem(pol.getStat());
         zadajCislo.setText(pol.getTelC());
-        switch (zadajStat.getSelectedItem().toString()) {
-
-            case "Slovensko":
-                predv.setText("+421");
-                break;
-            case "Cesko":
-                predv.setText("+42");
-                break;
-            case "Madarsko":
-                predv.setText("+36");
-                break;
-            case "Rakusko":
-                predv.setText("+43");
-                break;
-            case "Polsko":
-                predv.setText("+448");
-                break;}
-
         setTitle("podrobnosti o: " + pol.getMeno()
                 + " " + pol.getPriezvisko());
     }
